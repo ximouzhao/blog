@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>搭建gitpage博客(二) | Ximou&#39;s blog | 往事不回头，大步向前走</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="上一篇我们已经可以搭建出hello world博客，但是看起来不够炫酷，接下来我们就要使用hexo来给我们的博客添加一些特效。英文好的同学直接戳这里：https://hexo.io/docs/ 安装hexo之前需要安装node.js以及Git 安装完毕之后使用npm命令安装hexo,-g表示全局安装 npm install -g hexo-cli 使用以下命令安装Hexo到指定文件夹  hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建gitpage博客(二)">
+<meta property="og:url" content="http://ximou.xyz/2017/09/27/搭建gitpage博客-二/index.html">
+<meta property="og:site_name" content="Ximou&#39;s blog">
+<meta property="og:description" content="上一篇我们已经可以搭建出hello world博客，但是看起来不够炫酷，接下来我们就要使用hexo来给我们的博客添加一些特效。英文好的同学直接戳这里：https://hexo.io/docs/ 安装hexo之前需要安装node.js以及Git 安装完毕之后使用npm命令安装hexo,-g表示全局安装 npm install -g hexo-cli 使用以下命令安装Hexo到指定文件夹  hexo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-16T14:21:00.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建gitpage博客(二)">
+<meta name="twitter:description" content="上一篇我们已经可以搭建出hello world博客，但是看起来不够炫酷，接下来我们就要使用hexo来给我们的博客添加一些特效。英文好的同学直接戳这里：https://hexo.io/docs/ 安装hexo之前需要安装node.js以及Git 安装完毕之后使用npm命令安装hexo,-g表示全局安装 npm install -g hexo-cli 使用以下命令安装Hexo到指定文件夹  hexo">
+    
+        <link rel="alternate" type="application/atom+xml" title="Ximou&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Ximou</h5>
+          <a href="mailto:ximouzhao@gmail.com" title="ximouzhao@gmail.com" class="mail">ximouzhao@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ximouzhao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ximouzhao" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">搭建gitpage博客(二)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">搭建gitpage博客(二)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-27T11:32:38.000Z" itemprop="datePublished" class="page-time">
+  2017-09-27
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-搭建gitpage博客-二"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">搭建gitpage博客(二)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-27 19:32:38" datetime="2017-09-27T11:32:38.000Z"  itemprop="datePublished">2017-09-27</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>上一篇我们已经可以搭建出hello world博客，但是看起来不够炫酷，接下来我们就要使用hexo来给我们的博客添加一些特效。<br>英文好的同学直接戳这里：<a href="https://hexo.io/docs/" target="_blank" rel="noopener">https://hexo.io/docs/</a></p>
+<p>安装hexo之前需要安装node.js以及Git</p>
+<p>安装完毕之后使用npm命令安装hexo,-g表示全局安装</p>
+<p><code>npm install -g hexo-cli</code></p>
+<p>使用以下命令安装Hexo到指定文件夹</p>
+<pre>
+hexo init &lt;folder&gt;
+cd &lt;folder>&gt;
+npm install
+</pre>
+
+<p>安装成功后<br>新建一篇文章，</p>
+<pre>
+hexo init &lt;folder&gt;
+hexo new [layout] &lt;title&gt;
+hexo generate
+</pre>
+
+<p>启动本地服务：</p>
+<p><code>hexo s</code><br>相当于<br><code>hexo server</code></p>
+<p>出现如下界面即表示服务启动成功，这个服务是用来做本地调试用</p>
+<pre>
+$ hexo s
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+</pre>
+
+<p>浏览器访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以看到效果，</p>
+<p>那么问题来了，为什么全是英文的，并且博客标题也不对啊</p>
+<p>接下来我们来配置自己的博客：</p>
+<p>使用你喜欢的任意一款编辑器打开_config.yml文件<br>修改title为自己的博客名,注意yml文件对格式要求比较严格，冒号和后面的内容必须用一个空格隔开，<br>修改subtile为副标题<br>修改author为自己的名字<br>language比较重要，中文博客修改为zh-Hans<br>url是gitpage地址</p>
+<p>在本地预览下是不是已经更符合你的期待了，可是现在是运行在本地，我们需要部署到gitpage上公网访问，hexo提供了自动部署到github或者其他平台的功能，我们需要修改配置文件告诉hexo部署的目标信息<br>修改_config.yml文件<br>对于repository需要是ssh形式的url而不是https，如何配置github的ssh请戳这里<a href="http://www.cnblogs.com/superGG1990/p/6844952.html" target="_blank" rel="noopener">http://www.cnblogs.com/superGG1990/p/6844952.html</a> ，我们在此我们只需要完成前两步即可，<br>然后点击clone or download 选择use ssh，把文本框的内容拷贝下来放到repository即可。</p>
+<p>注意：这里type是git而不是github</p>
+<pre>
+deploy:
+    type: git
+    repository: git@github.com:username/blog.git
+    branch: master
+</pre>
+
+<p>然后执行以下命令安装 hexo-deployer-git工具，<br><code>npm install hexo-deployer-git --save</code><br>执行以下命令部署到github，<br><code>hexo d</code></p>
+<p>稍等片刻就可以使用你的usename.github.io访问你的博客了。</p>
+<p>新建一篇博客记录下来写写你的感受吧。<br><code>hexo new &quot;title&quot;</code><br>在source/_posts找到你标题对应的.md文件使用一款自己喜欢的markdown编辑器开始写博客吧，我用的是haroopad，工具不重要，重要的是博客的内容，所以不用太纠结。<br>完成后<br><code>hexo g</code><br><code>hexo d</code><br>就成功部署到github上了，是不是很方便。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-02-16T14:21:00.929Z" itemprop="dateUpdated">2019-02-16 22:21:00</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/09/27/搭建gitpage博客-二/" target="_blank" rel="external">http://ximou.xyz/2017/09/27/搭建gitpage博客-二/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://ximou.xyz">
+            <img src="/img/avatar.jpg" alt="Ximou">
+            Ximou
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/&title=《搭建gitpage博客(二)》 — Ximou's blog&pic=http://ximou.xyz/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/&title=《搭建gitpage博客(二)》 — Ximou's blog&source=Android Mysql 人生感悟" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《搭建gitpage博客(二)》 — Ximou's blog&url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/&via=http://ximou.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/27/搭建gitpage博客-三/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">搭建gitpage博客(三)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/26/搭建git-page博客/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">如何搭建git page博客</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Ximou &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/&title=《搭建gitpage博客(二)》 — Ximou's blog&pic=http://ximou.xyz/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/&title=《搭建gitpage博客(二)》 — Ximou's blog&source=Android Mysql 人生感悟" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《搭建gitpage博客(二)》 — Ximou's blog&url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/&via=http://ximou.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ximou.xyz/2017/09/27/搭建gitpage博客-二/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aS26DQBAFQN//0mQbKQK/7saRmSlWkRXDVBYv/eH1iq/j13X2ydm3qp9f33N0YWBgPJZxXF7JA/5+PrnD2bfOzoaBgbEPI791/uAkIRN8FNkYGBgYlyGYF3xJdGJgYGB8InDzuKwWoBgYGBjVJrYXoNclYxK4N/fiGBgYD2TkU/f///kj+w0MDIxHMY7ilQzXknY3LzGjU2FgYCzNyAPuurDrRWf1VYw358HAwFiaMXnlYv6t5nF7ZSIGBsZCjLxoy8f91bVoM8oxMDCWY+RBmRR5k0XCJJQxMDD2ZEyaz+qfJonXqAvHwMBYlDFvaCd95eTFjpv7cgwMjC9m9NxJAVcdvU3uhoGBsQOj13DmsGrBVx38YWBg7MO4dw3Za4Z7awkMDIy1GXkL2nvlaxK71RfFMDAw1mYka8t8tdlbG/TaXQwMjB0Yk3Vj1F6OgzgqLjEwMJZm5LVWXsAlzWe+fqg2uhgYGGszJgVidaDWe9kiiloMDIxFGfmB8gdXMb2QPW1lMTAwNmDky8JqG1wN90IZioGBsQGjF4WTTWn15Yk3wz4MDIxFGUfxyof7eVxOYrq8HcXAwHggYxKOE3A+pLvh6BgYGEsw5sP6OS8fxp2WpBgYGBsw8uDrlYB3/U+IdrAYGBgY1QfEQ7188YmBgYGRhONdI7nkoOUVJgYGxqKMe4f1vXjNIx4DA2M3xqh1LP5+NZTnBSsGBsbDGT/Rblbkc4UC1QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'ximouzhao';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ximouzhao';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

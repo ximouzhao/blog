@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>导入oracle数据库 | Ximou&#39;s blog | 往事不回头，大步向前走</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="忘记数据库连接用户名处理如下1234cmd中敲入命令sqlplus输入用户名/as sysdba,以管理员身份连接到oracle；查看用户名select username from dba_users 创建数据库用户命令如下：1CREATE USER nc65demo IDENTIFIED BY 1 DEFAULT TABLESPACE NNC_DATA01 TEMPORARY TABLESPAC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="导入oracle数据库">
+<meta property="og:url" content="http://ximou.xyz/2017/11/21/导入oracle数据库/index.html">
+<meta property="og:site_name" content="Ximou&#39;s blog">
+<meta property="og:description" content="忘记数据库连接用户名处理如下1234cmd中敲入命令sqlplus输入用户名/as sysdba,以管理员身份连接到oracle；查看用户名select username from dba_users 创建数据库用户命令如下：1CREATE USER nc65demo IDENTIFIED BY 1 DEFAULT TABLESPACE NNC_DATA01 TEMPORARY TABLESPAC">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-16T14:21:00.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="导入oracle数据库">
+<meta name="twitter:description" content="忘记数据库连接用户名处理如下1234cmd中敲入命令sqlplus输入用户名/as sysdba,以管理员身份连接到oracle；查看用户名select username from dba_users 创建数据库用户命令如下：1CREATE USER nc65demo IDENTIFIED BY 1 DEFAULT TABLESPACE NNC_DATA01 TEMPORARY TABLESPAC">
+    
+        <link rel="alternate" type="application/atom+xml" title="Ximou&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Ximou</h5>
+          <a href="mailto:ximouzhao@gmail.com" title="ximouzhao@gmail.com" class="mail">ximouzhao@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ximouzhao" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ximouzhao" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">导入oracle数据库</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">导入oracle数据库</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-21T15:50:59.000Z" itemprop="datePublished" class="page-time">
+  2017-11-21
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-导入oracle数据库"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">导入oracle数据库</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-21 23:50:59" datetime="2017-11-21T15:50:59.000Z"  itemprop="datePublished">2017-11-21</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>忘记数据库连接用户名处理如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmd中敲入命令sqlplus</span><br><span class="line">输入用户名/as sysdba,以管理员身份连接到oracle；</span><br><span class="line">查看用户名</span><br><span class="line">select username from dba_users</span><br></pre></td></tr></table></figure></p>
+<p>创建数据库用户命令如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> nc65demo <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">TABLESPACE</span> NNC_DATA01 <span class="keyword">TEMPORARY</span> <span class="keyword">TABLESPACE</span> temp;</span><br></pre></td></tr></table></figure></p>
+<p>授予管理员权限<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">connect</span>,dba <span class="keyword">to</span> nc65demo</span><br></pre></td></tr></table></figure></p>
+<p>普通导入方式<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp v65demo/1@orcl fromuser=v65demo touser=v65demo file=v65demo20160111.dmp buffer=100000000 <span class="built_in">log</span>=I:\v65demo20160111\log.log</span><br></pre></td></tr></table></figure></p>
+<p>数据泵导入方式：<br>1、查询路径信息<br>查看已有的路径信息<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> dba_directories;</span><br></pre></td></tr></table></figure></p>
+<p>2、创建路径<br>创建路径需要sys权限，需要有create any directory权限才可以创建路径。<br>　　选项：DIRECTORY=directory_object<br>　　Directory_object用于指定目录对象名称。需要注意，目录对象是使用CREATE DIRECTORY语句建立的对象，而不是OS目录。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg: <span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACEdirectory backup_path <span class="keyword">AS</span> <span class="string">'D:\APP\ORADATA\db_backup'</span>; <span class="comment">--创建路径名为dackup_path的路径，并指向硬盘的指定位置</span></span><br></pre></td></tr></table></figure></p>
+<p>对新创建的路径进行授权操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：<span class="keyword">grant</span> <span class="keyword">read</span>,write <span class="keyword">on</span> <span class="keyword">directory</span> backup_path <span class="keyword">to</span> orcldev; <span class="comment">--将对路径的读写权限分配各orcldev用户。</span></span><br></pre></td></tr></table></figure></p>
+<p>3.执行导入命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">impdp GJNC65/1@orcl2 DIRECTORY=backup_path dumpfile=GJNC65_20171009_2.DMP remap_schema=GJNC65:GJNC65  EXCLUDE=TABLE:\<span class="string">"IN ('SM_BUSILOG_DEFAULT')\"</span></span><br></pre></td></tr></table></figure></p>
+<p>这个命令排除了日志表SM_BUSILOG_DEFAULT<br>其定义如下,导入完成后手动执行即可<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> SM_BUSILOG_DEFAULT</span><br><span class="line">(</span><br><span class="line">  busiobjcode    VARCHAR2(<span class="number">200</span>),</span><br><span class="line">  busiobjname    VARCHAR2(<span class="number">300</span>),</span><br><span class="line">  <span class="keyword">client</span>         VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  dr             <span class="built_in">NUMBER</span>(<span class="number">10</span>) <span class="keyword">default</span> <span class="number">0</span>,</span><br><span class="line">  logdate        <span class="built_in">CHAR</span>(<span class="number">19</span>),</span><br><span class="line">  logmsg         <span class="built_in">BLOB</span>,</span><br><span class="line">  operateresult  VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  orgpk_busiobj  VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_busilog     <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  pk_busiobj     VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_group       VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_operation   VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_user        VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  ts             <span class="built_in">CHAR</span>(<span class="number">19</span>) <span class="keyword">default</span> to_char(<span class="keyword">sysdate</span>,<span class="string">'yyyy-mm-dd hh24:mi:ss'</span>),</span><br><span class="line">  typepk_busiobj VARCHAR2(<span class="number">36</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">tablespace</span> NNC_DATA01</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  <span class="keyword">initrans</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">maxtrans</span> <span class="number">255</span></span><br><span class="line">  <span class="keyword">storage</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">55552</span>K</span><br><span class="line">    <span class="keyword">next</span> <span class="number">256</span>K</span><br><span class="line">    <span class="keyword">minextents</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">maxextents</span> <span class="keyword">unlimited</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> INDEX_DEFAULTLOG_TYPEPKBUSIOBJ <span class="keyword">on</span> SM_BUSILOG_DEFAULT (TYPEPK_BUSIOBJ)</span><br><span class="line">  <span class="keyword">tablespace</span> NNC_INDEX01</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  <span class="keyword">initrans</span> <span class="number">2</span></span><br><span class="line">  <span class="keyword">maxtrans</span> <span class="number">255</span></span><br><span class="line">  <span class="keyword">storage</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">6</span>M</span><br><span class="line">    <span class="keyword">next</span> <span class="number">128</span>K</span><br><span class="line">    <span class="keyword">minextents</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">maxextents</span> <span class="keyword">unlimited</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> SM_BUSILOG_DEFAULT</span><br><span class="line">  <span class="keyword">add</span> <span class="keyword">constraint</span> PK_BUSILOG_DEFAULT primary <span class="keyword">key</span> (PK_BUSILOG)</span><br><span class="line">  <span class="keyword">using</span> <span class="keyword">index</span> </span><br><span class="line">  <span class="keyword">tablespace</span> NNC_INDEX01</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  <span class="keyword">initrans</span> <span class="number">2</span></span><br><span class="line">  <span class="keyword">maxtrans</span> <span class="number">255</span></span><br><span class="line">  <span class="keyword">storage</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">4</span>M</span><br><span class="line">    <span class="keyword">next</span> <span class="number">128</span>K</span><br><span class="line">    <span class="keyword">minextents</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">maxextents</span> <span class="keyword">unlimited</span></span><br><span class="line">  );</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-02-16T14:21:00.929Z" itemprop="dateUpdated">2019-02-16 22:21:00</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2017/11/21/导入oracle数据库/" target="_blank" rel="external">http://ximou.xyz/2017/11/21/导入oracle数据库/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://ximou.xyz">
+            <img src="/img/avatar.jpg" alt="Ximou">
+            Ximou
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ximou.xyz/2017/11/21/导入oracle数据库/&title=《导入oracle数据库》 — Ximou's blog&pic=http://ximou.xyz/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ximou.xyz/2017/11/21/导入oracle数据库/&title=《导入oracle数据库》 — Ximou's blog&source=Android Mysql 人生感悟" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ximou.xyz/2017/11/21/导入oracle数据库/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《导入oracle数据库》 — Ximou's blog&url=http://ximou.xyz/2017/11/21/导入oracle数据库/&via=http://ximou.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ximou.xyz/2017/11/21/导入oracle数据库/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/11/配置linux生产环境/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">配置linux生产环境</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/11/04/安装zip格式的mysql/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">安装zip格式的mysql_5.7</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Ximou &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ximou.xyz/2017/11/21/导入oracle数据库/&title=《导入oracle数据库》 — Ximou's blog&pic=http://ximou.xyz/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ximou.xyz/2017/11/21/导入oracle数据库/&title=《导入oracle数据库》 — Ximou's blog&source=Android Mysql 人生感悟" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ximou.xyz/2017/11/21/导入oracle数据库/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《导入oracle数据库》 — Ximou's blog&url=http://ximou.xyz/2017/11/21/导入oracle数据库/&via=http://ximou.xyz" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ximou.xyz/2017/11/21/导入oracle数据库/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aQW7jMAwF0Nz/0ul2gKmdT9IpYPppFQSppKcFS1J6veLx/mf8//3k89F4fWNgYGDclpFMd7T85CAupmJgYDyAcbRwvsz5bOfzV2fDwMDAuCog9pI/DAwMjAkjSRDPN9FLQzEwMDDyqXuY+UFcXItjYGDckFEtOP/y81fuNzAwMG7F6JWdeerWm7n8txgYGKsZvcJyXsT2juNDKYuBgbGU0dtor0wtNM6CBPGX/xsYGBirGUkzq5cCTh5tFAI0BgbGAxi9oJk36yeFa9QExMDAWM3oJYLJMvkmqtefH1bHwMBYyjif7hxQZedPK6qHgoGBsZVRTct6G7rq8uBDhouBgbGUUW30T0J2XgBXAzoGBsZuxjxpq8Ly+fNDwcDAeA4jT9Tya8jehWX5lxgYGKsZeXE4acZNrhx6T8owMDA2MSaPLa4Kqb1GGwYGxnMYvdZ/NYq/g9HbOgYGxnMYSVNs0pjLi+T8sA6bbhgYGKsZScGZJJF5iKyWwVHAxcDAWM3IA241NOdPMXrFMwYGxhMY1RRwfuVZfbpRvrbEwMBYxHgXR94US64HqtRybouBgbGC0Qt2veRv0rwbbR0DA2MFIw+yvVdm1USwGXAxMDAewEga+tUA2vsmf2yBgYGBkWw331bv+Vc5NcTAwMCIU8NqQ633dAMDA+NpjO8leb10MDm4wi0HBgbGzRnV0jFphM3TzQuSRQwMjA2MH/zPPOKDVrzlAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'ximouzhao';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'ximouzhao';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

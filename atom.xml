@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ximou&#39;s blog</title>
+  
+  <subtitle>往事不回头，大步向前走</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://ximou.xyz/"/>
+  <updated>2019-02-16T14:21:00.928Z</updated>
+  <id>http://ximou.xyz/</id>
+  
+  <author>
+    <name>Ximou</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android编译Github源代码构建出错</title>
+    <link href="http://ximou.xyz/2018/11/30/Android%E7%BC%96%E8%AF%91Github%E6%BA%90%E4%BB%A3%E7%A0%81%E6%9E%84%E5%BB%BA%E5%87%BA%E9%94%99/"/>
+    <id>http://ximou.xyz/2018/11/30/Android编译Github源代码构建出错/</id>
+    <published>2018-11-30T10:42:39.000Z</published>
+    <updated>2019-02-16T14:21:00.928Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、NDK问题"><a href="#一、NDK问题" class="headerlink" title="一、NDK问题"></a>一、NDK问题</h1><p>今天下下载了<a href="https://github.com/pengliangAndroid/VirtualLocation的源码导入到AndroidStudio之后构建工具报错分别如下" target="_blank" rel="noopener">https://github.com/pengliangAndroid/VirtualLocation的源码导入到AndroidStudio之后构建工具报错分别如下</a><br> 1.报错显示 mips64el-linux-android-strip 找不到<br>2.[could not resolve all dependencies for configuration ‘:app:debugAPK’]<br>3.ndkBuild Could not resolve all dependencies for configuration</p><h4 id="尝试了一天之后终于找到了解决办法："><a href="#尝试了一天之后终于找到了解决办法：" class="headerlink" title="尝试了一天之后终于找到了解决办法："></a>尝试了一天之后终于找到了解决办法：</h4><p>从 <a href="https://developer.android.google.cn/ndk/downloads/older_releases" target="_blank" rel="noopener">https://developer.android.google.cn/ndk/downloads/older_releases</a> 下载16b版本的ndk到本地, 并解压说后替换本地的NDK之后该错误解决。参考<a href="https://blog.csdn.net/bylaven/article/details/80331345" target="_blank" rel="noopener">https://blog.csdn.net/bylaven/article/details/80331345</a></p><h1 id="二、butterknife构建"><a href="#二、butterknife构建" class="headerlink" title="二、butterknife构建"></a>二、butterknife构建</h1><p>报错如下：Unable to find method ‘com.android.build.gradle.api.BaseVariant.getOutputs()Ljava/util/List;’.</p><p>解决方法：将butterknife的版本从8.8.1降至8.4.0</p><h1 id="三、butterknife简介"><a href="#三、butterknife简介" class="headerlink" title="三、butterknife简介"></a>三、butterknife简介</h1><p>ButterKnife是一个专注于Android系统的View注入框架,以前总是要写很多findViewById来找到View对象，有了ButterKnife可以很轻松的省去这些步骤。是大神JakeWharton的力作，目前使用很广。最重要的一点，使用ButterKnife对性能基本没有损失，因为ButterKnife用到的注解并不是在运行时反射的，而是在编译的时候生成新的class。项目集成起来也是特别方便，使用起来也是特别简单。</p><p>参考：<a href="https://www.jianshu.com/p/3678aafdabc7" target="_blank" rel="noopener">https://www.jianshu.com/p/3678aafdabc7</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;一、NDK问题&quot;&gt;&lt;a href=&quot;#一、NDK问题&quot; class=&quot;headerlink&quot; title=&quot;一、NDK问题&quot;&gt;&lt;/a&gt;一、NDK问题&lt;/h1&gt;&lt;p&gt;今天下下载了&lt;a href=&quot;https://github.com/pengliangAndroid
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android 无障碍和receiver的两个注意点</title>
+    <link href="http://ximou.xyz/2018/11/16/Android-%E6%97%A0%E9%9A%9C%E7%A2%8D%E5%92%8Creceiver%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9/"/>
+    <id>http://ximou.xyz/2018/11/16/Android-无障碍和receiver的两个注意点/</id>
+    <published>2018-11-16T07:40:08.000Z</published>
+    <updated>2019-02-16T14:21:00.928Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-AccessibilityService无效果-接收不到onAccessibilityEvent事件"><a href="#1-AccessibilityService无效果-接收不到onAccessibilityEvent事件" class="headerlink" title="1.AccessibilityService无效果 接收不到onAccessibilityEvent事件"></a>1.AccessibilityService无效果 接收不到onAccessibilityEvent事件</h2><p>在配置好AccessibilityService后，而且系统“辅助设置”已打开配置过的AccessibilityService，刚开始能用，但莫名出现onAccessibilityEvent事件接收不到的情况，原因只有一条：</p><p>程序出现了ANR，崩溃后AccessibilityServices就失效了，重启手机即可</p><hr><p>原文：<a href="https://blog.csdn.net/bunny1024/article/details/78139740" target="_blank" rel="noopener">https://blog.csdn.net/bunny1024/article/details/78139740</a></p><h2 id="2-广播监听android-net-conn-CONNECTIVITY-CHANGE-网络变化无法收到广播"><a href="#2-广播监听android-net-conn-CONNECTIVITY-CHANGE-网络变化无法收到广播" class="headerlink" title="2.广播监听android.net.conn.CONNECTIVITY_CHANGE 网络变化无法收到广播"></a>2.广播监听android.net.conn.CONNECTIVITY_CHANGE 网络变化无法收到广播</h2><p>根据<a href="https://developer.android.com/topic/performance/background-optimization的提示，api" target="_blank" rel="noopener">https://developer.android.com/topic/performance/background-optimization的提示，api</a> level 24以后通过manifest注册的<a href="https://developer.android.com/reference/android/net/ConnectivityManager.html#CONNECTIVITY_ACTION" target="_blank" rel="noopener">CONNECTIVITY_ACTION</a> 将不再发送广播，解决方法是通过actity的oncreate方法注册<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyReceiver receiver=<span class="keyword">new</span> MyReceiver();</span><br><span class="line"></span><br><span class="line">IntentFilter filter=<span class="keyword">new</span> IntentFilter();</span><br><span class="line"></span><br><span class="line">filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.registerReceiver(receiver,filter);</span><br></pre></td></tr></table></figure></p><h3 id="google文档如下"><a href="#google文档如下" class="headerlink" title="google文档如下"></a>google文档如下</h3><p>Background processes can be memory- and battery-intensive. For example, an implicit broadcast may start many background processes that have registered to listen for it, even if those processes may not do much work. This can have a substantial impact on both device performance and user experience.</p><p>To alleviate this issue, Android 7.0 (API level 24) applies the following restrictions:</p><p>Apps targeting Android 7.0 (API level 24) and higher do not receive <a href="https://developer.android.com/reference/android/net/ConnectivityManager.html#CONNECTIVITY_ACTION" target="_blank" rel="noopener">CONNECTIVITY_ACTION</a> broadcasts if they declare their broadcast receiver in the manifest. Apps will still receive <a href="https://developer.android.com/reference/android/net/ConnectivityManager.html#CONNECTIVITY_ACTION" target="_blank" rel="noopener">CONNECTIVITY_ACTION</a> broadcasts if they register their <a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html" target="_blank" rel="noopener">BroadcastReceiver</a> with <a href="https://developer.android.com/reference/android/content/Context.html#registerReceiver(android.content.BroadcastReceiver,%20android.content.IntentFilter" target="_blank" rel="noopener">Context.registerReceiver()</a>) and that context is still valid.</p><p>Apps cannot send or receive <a href="https://developer.android.com/reference/android/hardware/Camera.html#ACTION_NEW_PICTURE" target="_blank" rel="noopener">ACTION_NEW_PICTURE</a> or <a href="https://developer.android.com/reference/android/hardware/Camera.html#ACTION_NEW_VIDEO" target="_blank" rel="noopener">ACTION_NEW_VIDEO</a> broadcasts. This optimization affects all apps, not only those targeting Android 7.0 (API level 24).</p><p>If your app uses any of these intents, you should remove dependencies on them as soon as possible so that you can properly target devices running Android 7.0 or higher. The Android framework provides several solutions to mitigate the need for these implicit broadcasts. For example, <a href="https://developer.android.com/reference/android/app/job/JobScheduler.html" target="_blank" rel="noopener">JobScheduler</a> and the new <a href="https://developer.android.com/arch/work" target="_blank" rel="noopener">WorkManager</a> provide robust mechanisms to schedule network operations when specified conditions, such as a connection to an unmetered network, are met. You can now also use <a href="https://developer.android.com/reference/android/app/job/JobScheduler.html" target="_blank" rel="noopener">JobScheduler</a> to react to changes to content providers. <a href="https://developer.android.com/reference/android/app/job/JobInfo.html" target="_blank" rel="noopener">JobInfo</a> objects encapsulate the parameters that <a href="https://developer.android.com/reference/android/app/job/JobScheduler.html" target="_blank" rel="noopener">JobScheduler</a> uses to schedule your job. When the conditions of the job are met, the system executes this job on your app’s <a href="https://developer.android.com/reference/android/app/job/JobService.html" target="_blank" rel="noopener">JobService</a>.</p><p>In this document, we will learn how to use alternative methods, such as <a href="https://developer.android.com/reference/android/app/job/JobScheduler.html" target="_blank" rel="noopener">JobScheduler</a>, to adapt your app to these new restrictions.<br>·<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://upload-images.jianshu.io/upload_images/14992936-4d73e00e5925c702.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TIM截图20181116154910.png" title="">                </div>                <div class="image-caption">TIM截图20181116154910.png</div>            </figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-AccessibilityService无效果-接收不到onAccessibilityEvent事件&quot;&gt;&lt;a href=&quot;#1-AccessibilityService无效果-接收不到onAccessibilityEvent事件&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+    
+      <category term="Android Receiver" scheme="http://ximou.xyz/tags/Android-Receiver/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>书</title>
+    <link href="http://ximou.xyz/2018/07/15/%E4%B9%A6/"/>
+    <id>http://ximou.xyz/2018/07/15/书/</id>
+    <published>2018-07-15T03:18:24.000Z</published>
+    <updated>2019-02-16T14:21:00.928Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>电影</title>
+    <link href="http://ximou.xyz/2018/07/14/%E7%94%B5%E5%BD%B1/"/>
+    <id>http://ximou.xyz/2018/07/14/电影/</id>
+    <published>2018-07-14T09:15:03.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>《肖申克的救赎》豆瓣9.6分，无法超越的经典<br>《哈姆雷特》劳伦斯-奥利维尔饰演哈姆雷特<br>《海上钢琴师》<br>《阳光灿烂的日子》<br>《完美陌生人》<br>《爆裂无声》紧张到最后一刻<br>《红辣椒》比盗梦空间还烧脑还精彩<br>《控方证人》贪心和贪爱，你该怎么选<br>《高斯弗庄园》能看懂人物关系的，请留言<br>《八美图》从八个美女中猜谁是凶手》</p><p>《第六感》<br>大侦探波洛系列《尼罗河上的惨案》《东方快车谋杀案》《阳光下的罪恶》<br>《十二怒汉》<br>《完美陌生人》来玩个游戏吧，把你们所有的短信都展现在饭桌上</p><p>人性的引人深思的动漫：<br>    《阿修罗》阿修罗的命运注定是悲惨的，这部动漫比末世更让人 难过<br>    《大都会》讨论的是人与机器人能否共存<br>    《人狼》里面不仅仅有人性，更是充满黑暗残酷<br>    《东京教父》人性不都是黑暗的，也有温柔善良的，比如这部动漫<br>    《萤火虫之墓》这是一部非常虐心的动漫电影<br>烧脑电影<br>    《穆赫兰道》深度表达了潜意识梦境，现实和虚化的种种重叠，并且直现了人的欲望，这样的创意和构思，神了<br>    《记忆碎片》诺兰出手，必是神作。四十几个碎片就像是拼图一样，让观众在脑海中逐渐拼出这整个故事。<br>    《致命魔术》诺拉出品，不疯魔不成活，着魔于魔术的两个人相爱相杀，不到最后谁也不知道真相。<br>    《盗梦空间》诺兰出品，毋庸置疑的顶级科幻电影，在炫酷的科幻概念下，讲述囚禁和解放内心的股市。<br>    《禁闭岛》一个精神病人的美丽童话，最终反转的剧情实际上惊心动魄又不露声色。小李子的演技真的是没得说<br>    《蝴蝶效应》周而复始的人生，五次改变，以及一种结局。<br>    《恐怖游轮》死循环的烧脑片。一次又一次的轮回开启，永生永世无法救赎，生或死一遍又一遍。<br>    《致命id》精神分裂片鼻祖之一，精妙绝伦的剧本和大量的细节描写使得影片非常耐人寻味，不到结尾不见真相。<br>    《彗星来的那一夜》 科幻/悬疑/惊悚 一部令人细思甚恐的惊悚烧脑科幻片，你很可能会经历无聊-好奇-诧异-烧脑-恐怖-回味。<br>    《搏击俱乐部》豆瓣9.0，当生活苦闷的爱德华诺顿遇到追求刺激的布拉德皮特，会发生什么呢？<br>    《万能钥匙》<br>    《源代码》如果世界只剩下最后几分钟，你会怎么做<br>    《看不见的客人》结局惊天反转，答案揭晓的那一刻，所有人都惊呆了。<br>十大庞然巨兽电影<br>    《狂暴巨兽》<br>    《失落的大陆》<br>    《金刚》<br>    《魔窟》<br>    《迷雾》<br>    《长城》<br>    《异形魔怪》<br>    《科弗洛档案》<br>    《史前一万年》<br>    《哥斯拉》<br>哈佛商学院要求学生必看的电影<br>    《可口可乐小子》营销是生意不可或缺的部分。尤其是创业中不可缺少。一个男孩用可乐创造一个事业的故事。<br>    《成功的秘密》将当代年轻人渴望一步登天而不惜冒险的处世态度演的活灵活现，甚能引人共鸣。<br>    《大公司小老板》并购后一个26岁的空降兵取得了51岁的广告销售总监，故事就此展开。<br>    《巴塞罗那》一个美国销售员在西班牙的销售经历，让我们学到了销售的价值观，销售对客户文化的处理方式，销售对客户关系的把握。<br>    《社交网络》马克-扎克伯格，Facebook的创始人，史上最年轻的亿万富翁。<br>空难电影<br>    《空军一号》在美国总统言说的同时，一群尔罗斯苏联复国主义者（加里-奥德曼饰）佯装的电视新闻小组，则趁机潜入美国总统的座机“空军一号”<br>    《空中危机》飞机起飞后女主女儿不翼而飞，作为一个母亲，她誓要把莫名失踪的女儿找回来，在他带领观众揭开飞机每一个构造的时候，也揭开了一个惊天的阴谋。<br>    《93号航班》宾西法尼亚州尚克斯维尔的一片树林坠毁，机上45人全部遇难。媒体广泛猜测，由于乘客反抗，恐怖分子利用该机攻击华盛顿重要目标的企图失败。<br>    《迫降航班》当飞机进入一个云层的时候，出现了始料未及的困难，不过，维普毕竟是经验老道，很快就飞出了云层，不过，事情这个时候才开始失去控制。<br>    《插翅难飞》哈洛兰是空中小姐，在一架从纽约飞往洛杉矶的747客机上，为赶在最后一刻返回家乡过圣诞的旅客服务，然而空服人员们的喜气不久就蒙上了阴影，四位联邦探长远押解两个罪犯上机来了。<br>    《空中营救》一个未知号码发来的短信要求他向一个秘密账户转正1.5亿美元，否则就会每隔20分钟杀死航班上的乘客，本来想挽救众人的bill，却意外导致了几个人的死亡，他也被其他乘客当作一个劫机犯。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;《肖申克的救赎》豆瓣9.6分，无法超越的经典&lt;br&gt;《哈姆雷特》劳伦斯-奥利维尔饰演哈姆雷特&lt;br&gt;《海上钢琴师》&lt;br&gt;《阳光灿烂的日子》&lt;br&gt;《完美陌生人》&lt;br&gt;《爆裂无声》紧张到最后一刻&lt;br&gt;《红辣椒》比盗梦空间还烧脑还精彩&lt;br&gt;《控方证人》贪心和贪爱，你该怎
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>人物</title>
+    <link href="http://ximou.xyz/2018/07/14/%E4%BA%BA%E7%89%A9/"/>
+    <id>http://ximou.xyz/2018/07/14/人物/</id>
+    <published>2018-07-14T09:11:04.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>斯坦尼斯拉夫斯基 1863-1933 俄国戏剧教育家，理论家，建立了斯坦尼斯拉夫司机演剧体系<br>谢晋  《芙蓉镇》活下去，像牲口一样活下去 《春苗》 《海港》</p><p>谢飞</p><p>张北海</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;斯坦尼斯拉夫斯基 1863-1933 俄国戏剧教育家，理论家，建立了斯坦尼斯拉夫司机演剧体系&lt;br&gt;谢晋  《芙蓉镇》活下去，像牲口一样活下去 《春苗》 《海港》&lt;/p&gt;
+&lt;p&gt;谢飞&lt;/p&gt;
+&lt;p&gt;张北海&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>吴宇森</title>
+    <link href="http://ximou.xyz/2018/07/14/%E5%90%B4%E5%AE%87%E6%A3%AE/"/>
+    <id>http://ximou.xyz/2018/07/14/吴宇森/</id>
+    <published>2018-07-14T08:41:03.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>吴宇森，1946年9月22日出生于广东省广州市，中国香港导演、编剧、监制、演员。<br>1968年担任剧情片《死节》的编剧，从而进入电影圈。1973年执导个人首部电影《铁汉柔情》。1977年开始以喜剧片为发展主线。1983年加入新艺城电影公司。1986年执导的枪战片《英雄本色》奠定其暴力美学的电影风格，并获得第6届香港电影金像奖最佳影片奖 [1]  。1988年创办了香港电影导演会。1990年凭借动作片《喋血双雄》获得第9届香港电影金像奖最佳导演奖 [2]  ；同年出演动作片《勇闯天下》。1993年赴美国好莱坞发展。1997年凭借动作片《变脸》获得全美华裔艺术基金会金环奖 [3]  。2000年执导的谍战片《碟中谍2》获得全球电影年度票房冠军 [4]  。2004年获得香港政府颁发的铜紫荆星章 [5]  。<br>2006年回归华语影坛发展，并担任动作片《天堂口》的监制 [6]  。2009年6月，获得上海国际电影节华语电影杰出贡献奖金爵奖 [7]  ；同年凭借战争片《赤壁》获得中国电影华表奖优秀境外华裔导演奖 [8]  。2010年获得第67届威尼斯国际电影节终身成就奖。2015年获得第28届东京国际电影节武士奖 [9]  。2016年执导动作片《追捕》 [10]  。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;吴宇森，1946年9月22日出生于广东省广州市，中国香港导演、编剧、监制、演员。&lt;br&gt;1968年担任剧情片《死节》的编剧，从而进入电影圈。1973年执导个人首部电影《铁汉柔情》。1977年开始以喜剧片为发展主线。1983年加入新艺城电影公司。1986年执导的枪战片《英雄本
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>资本来到人间，从头到脚，每个毛孔都流着鲜血和肮脏的东西</title>
+    <link href="http://ximou.xyz/2018/07/14/%E8%B5%84%E6%9C%AC%E6%9D%A5%E5%88%B0%E4%BA%BA%E9%97%B4%EF%BC%8C%E4%BB%8E%E5%A4%B4%E5%88%B0%E8%84%9A%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%AF%9B%E5%AD%94%E9%83%BD%E6%B5%81%E7%9D%80%E9%B2%9C%E8%A1%80%E5%92%8C%E8%82%AE%E8%84%8F%E7%9A%84%E4%B8%9C%E8%A5%BF/"/>
+    <id>http://ximou.xyz/2018/07/14/资本来到人间，从头到脚，每个毛孔都流着鲜血和肮脏的东西/</id>
+    <published>2018-07-14T08:09:36.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>晓说20180713期，马克思所说</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;晓说20180713期，马克思所说&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>辛丑条约</title>
+    <link href="http://ximou.xyz/2018/07/14/%E8%BE%9B%E4%B8%91%E6%9D%A1%E7%BA%A6/"/>
+    <id>http://ximou.xyz/2018/07/14/辛丑条约/</id>
+    <published>2018-07-14T06:44:10.000Z</published>
+    <updated>2019-02-16T14:21:00.930Z</updated>
+    
+    <content type="html"><![CDATA[<p>《辛丑条约》，亦称《辛丑各国和约》、《北京议定书》，是中国清朝和英（大不列颠与爱尔兰联合王国）美（美利坚合众国）、法（法兰西第三共和国）德（德意志帝国）俄（俄罗斯帝国）日（日本帝国）意（意大利王国）奥（奥匈帝国）西（西班牙王国）荷（尼德兰王国）比（比利时王国）十一国在义和团运动失败、八国联军攻入北京后签定的一个不平等条约。 条约签定于光绪二十七年（1901年）七月二十五日，辛丑年，故名辛丑条约。因条约签订日为阳历9月7日，因此有“九七国耻”一说。<br>《辛丑条约》是中国近代史上赔款数目最庞大、主权丧失最严重的不平等条约。条约规定：1、中国赔款价息合计9.8亿两白银（详情为赔偿4.5亿白银，分39年还清，本息共计约9.8亿两），2、划定北京东交民巷为使馆界，允许各国驻兵保护，不准中国人在界内居住；3、清政府保证严禁人民参加反帝运动；4、清政府拆毁天津大沽口到北京沿线设防的炮台，允许列强各国派驻兵驻扎北京到山海关铁路沿线要地。该条约标志着清政府完全成为帝国主义统治中国的工具，中国彻底沦为半殖民地半封建社会，严重侵犯了中国的主权，给人民带来了沉重的负担。<br>该条约是帝国主义列强强加给中国的又一奴役性条约。它的签订进一步加强了帝国主义对中国的全面控制和掠夺，标志着中国已完全沦为半殖民地半封建社会。 [1]  《辛丑条约》真确文本原存于中华民国外交部，现存于台北外双溪国立故宫博物院恒温恒湿的库房保存。</p><p><a href="https://zhuanlan.zhihu.com/p/37846017" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37846017</a><br>中兴签订“辛丑条约”</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;《辛丑条约》，亦称《辛丑各国和约》、《北京议定书》，是中国清朝和英（大不列颠与爱尔兰联合王国）美（美利坚合众国）、法（法兰西第三共和国）德（德意志帝国）俄（俄罗斯帝国）日（日本帝国）意（意大利王国）奥（奥匈帝国）西（西班牙王国）荷（尼德兰王国）比（比利时王国）十一国在义和团
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux网络编程</title>
+    <link href="http://ximou.xyz/2018/05/23/linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    <id>http://ximou.xyz/2018/05/23/linux网络编程/</id>
+    <published>2018-05-23T11:54:56.000Z</published>
+    <updated>2019-02-16T14:21:00.928Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print inet_ntoa(ntohl(htonl(inet_addr(&quot;127.0.0.1&quot;))))</span><br><span class="line">//将127.0.0.1转化为int，再转为网络字节序，再转回来主机字节序，再转化为ip地址</span><br><span class="line">inet_addr()函数对应的头文件：</span><br><span class="line">Winsock2.h (windows)</span><br><span class="line">arpa/inet.h (Linux)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>aliyun远程桌面vnc和rdp连接从入门到放弃</title>
+    <link href="http://ximou.xyz/2018/05/18/aliyun%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vnc%E5%92%8Crdp%E8%BF%9E%E6%8E%A5%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83/"/>
+    <id>http://ximou.xyz/2018/05/18/aliyun远程桌面vnc和rdp连接从入门到放弃/</id>
+    <published>2018-05-18T05:46:01.000Z</published>
+    <updated>2019-02-16T14:21:00.928Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>gdb调试</title>
+    <link href="http://ximou.xyz/2018/05/17/gdb%E8%B0%83%E8%AF%95/"/>
+    <id>http://ximou.xyz/2018/05/17/gdb调试/</id>
+    <published>2018-05-17T09:28:46.000Z</published>
+    <updated>2019-02-16T14:21:00.928Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">gcc foo.c -I /home/include -o foo</span><br><span class="line">如果在当前目录没有所需要的头文件，则去这个指定的头文件目录进行搜索（通过引号进入）</span><br><span class="line">-L 和I类似，指定预设的库的路径（首先到指定的目录）</span><br><span class="line">-l 指定具体的库的名字</span><br><span class="line">-static:静态链接库文件。动态是.so为后缀，静态是.a为后缀</span><br><span class="line">-Wall 生成所有的警告信息</span><br><span class="line">-w 不生产警告信息</span><br><span class="line">-D 生成宏，eg:-DMACRO 等效于#define MACRO</span><br><span class="line">-c只编译，不链接成为可执行文件，编译器只能由输入的.c等源代码文件生成.o为后缀的目标文件。</span><br><span class="line">-g 产生调试工具所必要的符号信息，要想调试，就必须加入这个选项。</span><br><span class="line">-O （optimize）对程序进行优化编译，连接，执行效率更高，但是编译速度慢一些</span><br><span class="line">-O2 比-O进行更好的优化，执行效率更高，编译速度更慢</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.编译生成可执行文件gcc -g tst.c -o tst</span><br><span class="line">//一定不要忘了-g</span><br><span class="line">2.启动GDB</span><br><span class="line">gdb tst</span><br><span class="line">3. 在main函数处设置断点</span><br><span class="line">break main</span><br><span class="line">4.运行程序</span><br><span class="line">run</span><br><span class="line">5.next</span><br><span class="line">6.continue</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gcc编译阶段：</span><br><span class="line">预处理（Pre-Processing）包含进头文件，宏展开（替换），条件编译预处理</span><br><span class="line">编译(Compiling) 编译成汇编语言</span><br><span class="line">汇编(Assembling) 汇编编译成目标文件</span><br><span class="line">链接(Linking) 链接成为可执行文件</span><br></pre></td></tr></table></figure><p><code>`</code><br>gcc通过后缀区别输入文件的类别<br>.c  c语言源代码<br>.a  由目标文件构成的库文件<br>.C .cc .cxx 是C++源代码文件<br>.h 头文件<br>.i 已经预处理过的C源代码文件<br>.ii 已经预处理过的C++源代码文件<br>.o 编译后的目标文件（链接后就是可执行文件）<br>.s 汇编语言源代码文件<br>.S 经过预编译的汇编语言源代码文件</p><p>gcc是gnu推出的功能强大，性能优越的多平台编译器，是gnu的代表作之一，gcc可以在多种硬件平台上编译出可执行程序，其执行效率与一般的编译器相比要高20%~30%</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>配置linux生产环境</title>
+    <link href="http://ximou.xyz/2018/03/11/%E9%85%8D%E7%BD%AElinux%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/"/>
+    <id>http://ximou.xyz/2018/03/11/配置linux生产环境/</id>
+    <published>2018-03-11T07:25:59.000Z</published>
+    <updated>2019-02-16T14:21:00.930Z</updated>
+    
+    <content type="html"><![CDATA[<p>查看机器版本<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/version</span><br><span class="line"></span><br><span class="line">cat /etc/redhat-release，这种方法只适合Redhat系的Linux：</span><br><span class="line"></span><br><span class="line">[root@S-CentOS home]<span class="comment"># cat /etc/redhat-release</span></span><br><span class="line">CentOS release 6.5 (Final)</span><br></pre></td></tr></table></figure></p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">free -m //以m为单位显示内存使用情况</span><br><span class="line">fdisk -l //</span><br></pre></td></tr></table></figure><p>jdk7linux下载地址<a href="http://www.pc6.com/softview/SoftView_447834.html" target="_blank" rel="noopener">http://www.pc6.com/softview/SoftView_447834.html</a><br><a href="http://7dx.pc6.com/wwb5/jdk7u79linuxx64.tar.gz" target="_blank" rel="noopener">http://7dx.pc6.com/wwb5/jdk7u79linuxx64.tar.gz</a><br>官网<a href="https://tomcat.apache.org/download-80.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-80.cgi</a><br>tomcat最终下载地址<a href="http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50.tar.gz</a><br>命令行浏览器yum  install   links</p><p>linuxoracle 下载地址<a href="http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_1of2.zip?AuthParam=1520773212_487351b546f61d1bfaa7bf6a069ced87" target="_blank" rel="noopener">http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_1of2.zip?AuthParam=1520773212_487351b546f61d1bfaa7bf6a069ced87</a><br><a href="http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_2of2.zip?AuthParam=1520773205_1f47cb0a74d8af2b4c33e7debfdabad3" target="_blank" rel="noopener">http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_2of2.zip?AuthParam=1520773205_1f47cb0a74d8af2b4c33e7debfdabad3</a><br>这里有授权</p><p>compat-libcap1-1.10-3.el7.x86_64<br>记住yum install compat-libcap1</p><p>top命令<br>进程信息区<br>统计信息区域的下方显示了各个进程的详细信息。首先来认识一下各列的含义。</p><p>序号    列名    含义<br>a    PID    进程id<br>b    PPID    父进程id<br>c    RUSER    Real user name<br>d    UID    进程所有者的用户id<br>e    USER    进程所有者的用户名<br>f    GROUP    进程所有者的组名<br>g    TTY    启动进程的终端名。不是从终端启动的进程则显示为 ?<br>h    PR    优先级<br>i    NI    nice值。负值表示高优先级，正值表示低优先级<br>j    P    最后使用的CPU，仅在多CPU环境下有意义<br>k    %CPU    上次更新到现在的CPU时间占用百分比<br>l    TIME    进程使用的CPU时间总计，单位秒<br>m    TIME+    进程使用的CPU时间总计，单位1/100秒<br>n    %MEM    进程使用的物理内存百分比<br>o    VIRT    进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES<br>p    SWAP    进程使用的虚拟内存中，被换出的大小，单位kb。<br>q    RES    进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA<br>r    CODE    可执行代码占用的物理内存大小，单位kb<br>s    DATA    可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb<br>t    SHR    共享内存大小，单位kb<br>u    nFLT    页面错误次数<br>v    nDRT    最后一次写入到现在，被修改过的页面数。<br>w    S    进程状态。<br>D=不可中断的睡眠状态<br>R=运行<br>S=睡眠<br>T=跟踪/停止<br>Z=僵尸进程<br>x    COMMAND    命令名/命令行<br>y    WCHAN    若该进程在睡眠，则显示睡眠中的系统函数名<br>z    Flags    任务标志，参考 sched.h<br>默认情况下仅显示比较重要的 PID、USER、PR、NI、VIRT、RES、SHR、S、%CPU、%MEM、TIME+、COMMAND 列。可以通过下面的快捷键来更改显示内容。</p><p>dbca -silent -createDatabase -templateName General_Purpose.dbc -gdbName orcl -sysPassword oracle -systemPassword oracle<br>可以使用</p><p>注意排版<br>遭遇TNS-01150: The address of the specified listener name is incorrect<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SID_LIST_LISTENER = </span><br><span class="line">  (SID_LIST = </span><br><span class="line">    (SID_DESC =</span><br><span class="line">      (SID_NAME = PLSExtProc) </span><br><span class="line">      (ORACLE_HOME = /oracle/product/10.2.0/db_1) </span><br><span class="line">      (PROGRAM = extproc)</span><br><span class="line">    ) </span><br><span class="line">    (SID_DESC =</span><br><span class="line">      (GLOBAL_DBNAME = orcl)</span><br><span class="line">      (ORACLE_HOME = /oracle/product/10.2.0/db_1) </span><br><span class="line">      (SID_NAME = orcl)</span><br><span class="line">    ) </span><br><span class="line">  ) </span><br><span class="line">LISTENER = </span><br><span class="line">  (DESCRIPTION_LIST = </span><br><span class="line">    (DESCRIPTION =</span><br><span class="line">      (ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1)) </span><br><span class="line">      (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)) </span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure></p><p>SQL&gt;START file_name<br>or<br>SQL&gt;@ file_name</p><p>1 .sqlplus system/system@srv </p><ol start="2"><li>sql&gt;@c:\a.sql  (执行此命令前将a.sql  拷到C盘根目录)</li></ol><p>sqlplus system/system@srv @a.sql<br>或者登录sqlplus后执行@a.sql</p><p>那怎么开启一个端口呢<br>添加<br>firewall-cmd –zone=public –add-port=80/tcp –permanent    （–permanent永久生效，没有此参数重启后失效）<br>重新载入<br>firewall-cmd –reload<br>查看<br>firewall-cmd –zone= public –query-port=80/tcp<br>删除<br>firewall-cmd –zone= public –remove-port=80/tcp –permanent</p><p>按以下次序依次安装<br>rpm -ivh mysql-community-common-5.7.12-1.el6.x86_64.rpm<br>rpm -ivh mysql-community-libs-5.7.12-1.el6.x86_64.rpm<br>rpm -ivh mysql-community-devel-5.7.12-1.el6.x86_64.rpm<br>rpm -ivh mysql-community-client-5.7.12-1.el6.x86_64.rpm<br>rpm -ivh mysql-community-server-5.7.12-1.el6.x86_64.rpm</p><p>systemctl start mysqld</p><p>低版本redhat需要解决：<br>yum install perl<br>yum install net-tools<br>卸载依赖rpm -e mariadb-libs-1:5.5.56-2.el7.x86_64 –nodeps</p><p>/var/lib/mysql</p><p>#vim /etc/my.cnf(注：windows下修改的是my.ini)</p><p>///set password=password(“qazplm!@#”);//不可用 ERROR 1290 (HY000): The MySQL server is running with the –skip-grant-tables option so it cannot exe<br>cute this statement</p><p>#vim /etc/my.cnf(注：windows下修改的是my.ini)</p><p>在文档内搜索mysqld定位到[mysqld]文本段：<br>/mysqld(在vim编辑状态下直接输入该命令可搜索文本内容)</p><p>在[mysqld]后面任意一行添加“skip-grant-tables”用来跳过密码验证的过程，如下图所示：<br>mysql -uroot –p（密码）<br>use mysql;<br>5.7 正确更新密码：update mysql.user set authentication_string=password(‘mimeTGBmima1@#’) where user=’root’;<br>CREATE USER ‘username‘@’host’ IDENTIFIED BY ‘password’;<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'dog'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'pig'</span>@<span class="string">'192.168.1.101_'</span> IDENDIFIED <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'pig'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'pig'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">''</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'pig'</span>@<span class="string">'%'</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'zhaoxmf'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'mimeTGBmima1@#'</span>;</span><br><span class="line">以下报错解决方法</span><br><span class="line">ERROR 1819 (HY000): Your password does not satisfy the current policy requirement.</span><br><span class="line"><span class="keyword">alter</span>  <span class="keyword">user</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'#20as3SElksds0ew98'</span>;</span><br><span class="line"><span class="keyword">alter</span>  <span class="keyword">user</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'mimeTGBmima1@#'</span>;</span><br></pre></td></tr></table></figure></p><p>zhaoxmf mimeTGBmima1@#  umpay</p><p>grant all privileges on <em>.</em> to ‘zhaoxmf‘@’%’ with grant option;</p><p>mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ WITH GRANT OPTION<br>//使修改生效<br>mysql&gt;FLUSH PRIVILEGES<br>//退出MySQL服务器<br>mysql&gt;EXIT</p><p>mysql的view不能有子查询语句</p><p>linux查看系统编码和修改系统编码的方法</p><h1 id="locale"><a href="#locale" class="headerlink" title="locale"></a>locale</h1><p>LANG=en_US.UTF-8<br>LC_CTYPE=”en_US.UTF-8”<br>LC_NUMERIC=”en_US.UTF-8”<br>LC_TIME=”en_US.UTF-8”<br>LC_COLLATE=”en_US.UTF-8”<br>LC_MONETARY=”en_US.UTF-8”<br>LC_MESSAGES=”en_US.UTF-8”<br>LC_PAPER=”en_US.UTF-8”<br>LC_NAME=”en_US.UTF-8”<br>LC_ADDRESS=”en_US.UTF-8”<br>LC_TELEPHONE=”en_US.UTF-8”<br>LC_MEASUREMENT=”en_US.UTF-8”<br>LC_IDENTIFICATION=”en_US.UTF-8”</p><p>CREATE DATABASE 库名;<br>use database;</p><p>vi /etc/profile<br>export JAVA_HOME=/usr/local/jdk1.7.0_71</p><p>export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p><p>export PATH=$JAVA_HOME/bin:$PATH<br>source /etc/profile<br>输入 java -version 然后会显示jdk的版本信息等</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;查看机器版本&lt;br&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>导入oracle数据库</title>
+    <link href="http://ximou.xyz/2017/11/21/%E5%AF%BC%E5%85%A5oracle%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>http://ximou.xyz/2017/11/21/导入oracle数据库/</id>
+    <published>2017-11-21T15:50:59.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>忘记数据库连接用户名处理如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmd中敲入命令sqlplus</span><br><span class="line">输入用户名/as sysdba,以管理员身份连接到oracle；</span><br><span class="line">查看用户名</span><br><span class="line">select username from dba_users</span><br></pre></td></tr></table></figure></p><p>创建数据库用户命令如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> nc65demo <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">TABLESPACE</span> NNC_DATA01 <span class="keyword">TEMPORARY</span> <span class="keyword">TABLESPACE</span> temp;</span><br></pre></td></tr></table></figure></p><p>授予管理员权限<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">connect</span>,dba <span class="keyword">to</span> nc65demo</span><br></pre></td></tr></table></figure></p><p>普通导入方式<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imp v65demo/1@orcl fromuser=v65demo touser=v65demo file=v65demo20160111.dmp buffer=100000000 <span class="built_in">log</span>=I:\v65demo20160111\log.log</span><br></pre></td></tr></table></figure></p><p>数据泵导入方式：<br>1、查询路径信息<br>查看已有的路径信息<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> dba_directories;</span><br></pre></td></tr></table></figure></p><p>2、创建路径<br>创建路径需要sys权限，需要有create any directory权限才可以创建路径。<br>　　选项：DIRECTORY=directory_object<br>　　Directory_object用于指定目录对象名称。需要注意，目录对象是使用CREATE DIRECTORY语句建立的对象，而不是OS目录。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg: <span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACEdirectory backup_path <span class="keyword">AS</span> <span class="string">'D:\APP\ORADATA\db_backup'</span>; <span class="comment">--创建路径名为dackup_path的路径，并指向硬盘的指定位置</span></span><br></pre></td></tr></table></figure></p><p>对新创建的路径进行授权操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：<span class="keyword">grant</span> <span class="keyword">read</span>,write <span class="keyword">on</span> <span class="keyword">directory</span> backup_path <span class="keyword">to</span> orcldev; <span class="comment">--将对路径的读写权限分配各orcldev用户。</span></span><br></pre></td></tr></table></figure></p><p>3.执行导入命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">impdp GJNC65/1@orcl2 DIRECTORY=backup_path dumpfile=GJNC65_20171009_2.DMP remap_schema=GJNC65:GJNC65  EXCLUDE=TABLE:\<span class="string">"IN ('SM_BUSILOG_DEFAULT')\"</span></span><br></pre></td></tr></table></figure></p><p>这个命令排除了日志表SM_BUSILOG_DEFAULT<br>其定义如下,导入完成后手动执行即可<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> SM_BUSILOG_DEFAULT</span><br><span class="line">(</span><br><span class="line">  busiobjcode    VARCHAR2(<span class="number">200</span>),</span><br><span class="line">  busiobjname    VARCHAR2(<span class="number">300</span>),</span><br><span class="line">  <span class="keyword">client</span>         VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  dr             <span class="built_in">NUMBER</span>(<span class="number">10</span>) <span class="keyword">default</span> <span class="number">0</span>,</span><br><span class="line">  logdate        <span class="built_in">CHAR</span>(<span class="number">19</span>),</span><br><span class="line">  logmsg         <span class="built_in">BLOB</span>,</span><br><span class="line">  operateresult  VARCHAR2(<span class="number">50</span>),</span><br><span class="line">  orgpk_busiobj  VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_busilog     <span class="built_in">CHAR</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  pk_busiobj     VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_group       VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_operation   VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  pk_user        VARCHAR2(<span class="number">36</span>),</span><br><span class="line">  ts             <span class="built_in">CHAR</span>(<span class="number">19</span>) <span class="keyword">default</span> to_char(<span class="keyword">sysdate</span>,<span class="string">'yyyy-mm-dd hh24:mi:ss'</span>),</span><br><span class="line">  typepk_busiobj VARCHAR2(<span class="number">36</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">tablespace</span> NNC_DATA01</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  <span class="keyword">initrans</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">maxtrans</span> <span class="number">255</span></span><br><span class="line">  <span class="keyword">storage</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">55552</span>K</span><br><span class="line">    <span class="keyword">next</span> <span class="number">256</span>K</span><br><span class="line">    <span class="keyword">minextents</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">maxextents</span> <span class="keyword">unlimited</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> INDEX_DEFAULTLOG_TYPEPKBUSIOBJ <span class="keyword">on</span> SM_BUSILOG_DEFAULT (TYPEPK_BUSIOBJ)</span><br><span class="line">  <span class="keyword">tablespace</span> NNC_INDEX01</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  <span class="keyword">initrans</span> <span class="number">2</span></span><br><span class="line">  <span class="keyword">maxtrans</span> <span class="number">255</span></span><br><span class="line">  <span class="keyword">storage</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">6</span>M</span><br><span class="line">    <span class="keyword">next</span> <span class="number">128</span>K</span><br><span class="line">    <span class="keyword">minextents</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">maxextents</span> <span class="keyword">unlimited</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> SM_BUSILOG_DEFAULT</span><br><span class="line">  <span class="keyword">add</span> <span class="keyword">constraint</span> PK_BUSILOG_DEFAULT primary <span class="keyword">key</span> (PK_BUSILOG)</span><br><span class="line">  <span class="keyword">using</span> <span class="keyword">index</span> </span><br><span class="line">  <span class="keyword">tablespace</span> NNC_INDEX01</span><br><span class="line">  pctfree <span class="number">10</span></span><br><span class="line">  <span class="keyword">initrans</span> <span class="number">2</span></span><br><span class="line">  <span class="keyword">maxtrans</span> <span class="number">255</span></span><br><span class="line">  <span class="keyword">storage</span></span><br><span class="line">  (</span><br><span class="line">    <span class="keyword">initial</span> <span class="number">4</span>M</span><br><span class="line">    <span class="keyword">next</span> <span class="number">128</span>K</span><br><span class="line">    <span class="keyword">minextents</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">maxextents</span> <span class="keyword">unlimited</span></span><br><span class="line">  );</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;忘记数据库连接用户名处理如下&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>安装zip格式的mysql_5.7</title>
+    <link href="http://ximou.xyz/2017/11/04/%E5%AE%89%E8%A3%85zip%E6%A0%BC%E5%BC%8F%E7%9A%84mysql/"/>
+    <id>http://ximou.xyz/2017/11/04/安装zip格式的mysql/</id>
+    <published>2017-11-04T04:19:32.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、到官网下载zip文件。<br>二、解压到目录，并配置path环境变量，如D:\common\mysql\mysql-5.7.20-winx64\bin<br>三、在mysql目录新建或修改my.ini<br>添加以下内容</p><pre>[mysqld] basedir=D:\common\mysql\mysql-5.7.20-winx64datadir=D:\common\mysql\mysql-5.7.20-winx64\dataport=3306max_connections=200character-set-server=utf8default-storage-engine=innodb[mysql]default-character-set=utf8</pre><p>四、在mysql文件下新建对应的datadir，比如在mysql-5.7.20-winx64下新建data文件夹<br>五、执行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqld -install</span><br><span class="line">mysqld --initialize /*一定要执行这个命令*/</span><br></pre></td></tr></table></figure></p><p>安装并初始化mysql<br>六、执行<br><code>net start mysql</code><br>启动mysql</p><p>七、windows环境下修改root用户密码<br>在mysql_5.6以后，root密码默认不为空，是一个随机的密码，没找到这个密码保存的地方，所以安装好之后我们需要重置一下mysql的root用户密码<br>1、运行<code>net stop mysql</code>停止mysql服务<br>2、运行<code>mysqld --skip-grant-tables</code>启动mysqld 服务，注意是mysqld不是mysql<br>3、运行<code>mysql -u root</code>登录到mysql<br>4、运行<code>update mysql.user set authentication_string=password(&#39;123qwe&#39;) where user=&#39;root&#39; and Host = &#39;localhost&#39;;</code>新版mysql数据库下已经没有password字段了<br>5、运行<code>flush privileges;</code>重新装载权限<br>6、运行<code>quit;</code>退出mysql<br>7、在任务管理器中杀掉mysqld进程<br>8、运行<code>net start mysql</code>正常启动mysql服务<br>9、运行<code>mysql -u root -p</code>输入刚才修改的密码登陆到mysql<br>10、系统会提示需要修改密码，这时候再执行<code>set password for root@localhost = password(&#39;123qwe&#39;);</code>即可</p><p>八、错误处理</p><p>执行net start mysql 提示mysql启动失败，没有输出任何的错误<br>是因为我们没有执行mysqld –initialize命令就启动服务导致。<br>我们只需要清空data目录，重新执行mysqld –initialize命令即可</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一、到官网下载zip文件。&lt;br&gt;二、解压到目录，并配置path环境变量，如D:\common\mysql\mysql-5.7.20-winx64\bin&lt;br&gt;三、在mysql目录新建或修改my.ini&lt;br&gt;添加以下内容&lt;/p&gt;
+&lt;pre&gt;
+[mysqld] 
+base
+      
+    
+    </summary>
+    
+    
+      <category term="mysql" scheme="http://ximou.xyz/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建gitpage博客(三)</title>
+    <link href="http://ximou.xyz/2017/09/27/%E6%90%AD%E5%BB%BAgitpage%E5%8D%9A%E5%AE%A2-%E4%B8%89/"/>
+    <id>http://ximou.xyz/2017/09/27/搭建gitpage博客-三/</id>
+    <published>2017-09-27T12:54:11.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用next主题，英文好的请移步<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> your-hexo-site</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure><p>修改_config.yml配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Extensions</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Plugins: http://hexo.io/plugins/</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Themes: http://hexo.io/themes/</span></span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure></p><p>主题设定<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html</a><br>第三方服务<a href="http://theme-next.iissnan.com/third-party-services.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/third-party-services.html</a></p><p>参见：<a href="http://www.jianshu.com/p/f66103553c45" target="_blank" rel="noopener">http://www.jianshu.com/p/f66103553c45</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用next主题，英文好的请移步&lt;a href=&quot;https://github.com/iissnan/hexo-theme-next&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/iissnan/hexo-theme
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建gitpage博客(二)</title>
+    <link href="http://ximou.xyz/2017/09/27/%E6%90%AD%E5%BB%BAgitpage%E5%8D%9A%E5%AE%A2-%E4%BA%8C/"/>
+    <id>http://ximou.xyz/2017/09/27/搭建gitpage博客-二/</id>
+    <published>2017-09-27T11:32:38.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>上一篇我们已经可以搭建出hello world博客，但是看起来不够炫酷，接下来我们就要使用hexo来给我们的博客添加一些特效。<br>英文好的同学直接戳这里：<a href="https://hexo.io/docs/" target="_blank" rel="noopener">https://hexo.io/docs/</a></p><p>安装hexo之前需要安装node.js以及Git</p><p>安装完毕之后使用npm命令安装hexo,-g表示全局安装</p><p><code>npm install -g hexo-cli</code></p><p>使用以下命令安装Hexo到指定文件夹</p><pre>hexo init &lt;folder&gt;cd &lt;folder>&gt;npm install</pre><p>安装成功后<br>新建一篇文章，</p><pre>hexo init &lt;folder&gt;hexo new [layout] &lt;title&gt;hexo generate</pre><p>启动本地服务：</p><p><code>hexo s</code><br>相当于<br><code>hexo server</code></p><p>出现如下界面即表示服务启动成功，这个服务是用来做本地调试用</p><pre>$ hexo sINFO  Start processingINFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</pre><p>浏览器访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 便可以看到效果，</p><p>那么问题来了，为什么全是英文的，并且博客标题也不对啊</p><p>接下来我们来配置自己的博客：</p><p>使用你喜欢的任意一款编辑器打开_config.yml文件<br>修改title为自己的博客名,注意yml文件对格式要求比较严格，冒号和后面的内容必须用一个空格隔开，<br>修改subtile为副标题<br>修改author为自己的名字<br>language比较重要，中文博客修改为zh-Hans<br>url是gitpage地址</p><p>在本地预览下是不是已经更符合你的期待了，可是现在是运行在本地，我们需要部署到gitpage上公网访问，hexo提供了自动部署到github或者其他平台的功能，我们需要修改配置文件告诉hexo部署的目标信息<br>修改_config.yml文件<br>对于repository需要是ssh形式的url而不是https，如何配置github的ssh请戳这里<a href="http://www.cnblogs.com/superGG1990/p/6844952.html" target="_blank" rel="noopener">http://www.cnblogs.com/superGG1990/p/6844952.html</a> ，我们在此我们只需要完成前两步即可，<br>然后点击clone or download 选择use ssh，把文本框的内容拷贝下来放到repository即可。</p><p>注意：这里type是git而不是github</p><pre>deploy:    type: git    repository: git@github.com:username/blog.git    branch: master</pre><p>然后执行以下命令安装 hexo-deployer-git工具，<br><code>npm install hexo-deployer-git --save</code><br>执行以下命令部署到github，<br><code>hexo d</code></p><p>稍等片刻就可以使用你的usename.github.io访问你的博客了。</p><p>新建一篇博客记录下来写写你的感受吧。<br><code>hexo new &quot;title&quot;</code><br>在source/_posts找到你标题对应的.md文件使用一款自己喜欢的markdown编辑器开始写博客吧，我用的是haroopad，工具不重要，重要的是博客的内容，所以不用太纠结。<br>完成后<br><code>hexo g</code><br><code>hexo d</code><br>就成功部署到github上了，是不是很方便。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;上一篇我们已经可以搭建出hello world博客，但是看起来不够炫酷，接下来我们就要使用hexo来给我们的博客添加一些特效。&lt;br&gt;英文好的同学直接戳这里：&lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noope
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何搭建git page博客</title>
+    <link href="http://ximou.xyz/2017/09/26/%E6%90%AD%E5%BB%BAgit-page%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://ximou.xyz/2017/09/26/搭建git-page博客/</id>
+    <published>2017-09-26T14:32:11.000Z</published>
+    <updated>2019-02-16T14:21:00.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>#如何搭建gitpage博客</p><p>使用github page服务可以快速搭建个人博客，在搭建过程中遇到了些问题，所以在此做一次完整的梳理，让后来人都能躲过这一个个坑。</p><p>搭建步骤如下:<br>1.申请github账号(哈哈，废话)，(国内也有其他的类似平台，比如coding.net这个也尝试过，coding.net搭建过程类似，但是必须在首页添加Hosted by Coding Pages文字或者图标，不添加的情况下会有一次的中间跳转页面，添加完成后并且审核通过就可以跳过跳转页面)。<br>2.Create a new repository,项目名称为username.github.io,比如我的就是zhaoxmf.github.io,username就是你的github用户名或者组织名称。<br>3.使用git将该项目clone到本地，<br><code>git clone https://github.com/username/username.github.io</code><br>4.切换进用户目录<br><code>cd username.github.io</code><br>5.创建一个index.html文件：<br><code>echo &quot;hello world&quot; &gt; index.html</code><br>6.提交到github</p><pre>git add -allgit commit -m "initial commit"git push -u prigin master</pre><p>9.现在去访问<a href="https://username.github.io" target="_blank" rel="noopener">https://username.github.io</a>, 是不是已经显示出hello,world，那么恭喜你，第一个博客搭建完毕</p><p>当然这只是初始版，进阶版请查看下一篇</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;#如何搭建gitpage博客&lt;/p&gt;
+&lt;p&gt;使用github page服务可以快速搭建个人博客，在搭建过程中遇到了些问题，所以在此做一次完整的梳理，让后来人都能躲过这一个个坑。&lt;/p&gt;
+&lt;p&gt;搭建步骤如下:&lt;br&gt;1.申请github账号(哈哈，废话)，(国内也有其他的类似
+      
+    
+    </summary>
+    
+    
+      <category term="gitpage" scheme="http://ximou.xyz/tags/gitpage/"/>
+    
+  </entry>
+  
+</feed>
